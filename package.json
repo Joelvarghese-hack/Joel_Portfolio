@@ -1,0 +1,14 @@
+{
+  "name": "joel-portfolio-linkedin-scraper",
+  "version": "1.0.0",
+  "description": "LinkedIn profile scraper using Apify client for Joel's portfolio",
+  "main": "linkedin-scraper.js",
+  "type": "module",
+  "scripts": {
+    "scrape": "node linkedin-scraper.js"
+  },
+  "dependencies": {
+    "apify-client": "^2.9.3",
+    "dotenv": "^16.4.5"
+  }
+}
