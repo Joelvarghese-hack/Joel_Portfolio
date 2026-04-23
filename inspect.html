@@ -5,18 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Joel Varghese</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script>
-function showPage(id,btn){
-  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
-  document.querySelectorAll('.nav-links button').forEach(function(b){b.classList.remove('active');});
-  document.getElementById(id).classList.add('active');
-  if(btn) btn.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}
-function closeNav(){document.getElementById('navLinks').classList.remove('open');}
-function openPDF(url){ window.open(url, '_blank'); }
-</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -42,8 +30,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
 .hamburger span{display:block;width:24px;height:2px;background:#fff}
 .page{display:none;padding-top:72px;min-height:100vh}
-.page.active{display:block;animation:fadeUp 0.35s ease}
-@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.page.active{display:block}
 .container{max-width:1060px;margin:0 auto;padding:0 56px}
 .eyebrow{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);margin-bottom:14px;font-weight:600}
 .eyebrow-light{color:var(--sage-pale)}
@@ -249,12 +236,9 @@ footer p{font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:0.04em;font-
   #contact .contact-links{padding:32px 20px;border-right:none}
   footer{padding:20px;flex-direction:column;gap:6px;text-align:center}
 }
-
-
 </style>
 </head>
 <body>
-
 <nav>
   <div class="nav-logo" onclick="showPage('home')">Joel <span>Varghese</span></div>
   <ul class="nav-links" id="navLinks">
@@ -429,7 +413,7 @@ footer p{font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:0.04em;font-
           <div class="finding-card"><h4>Adaptive Forms Needed</h4><p>Forms should auto adjust based on applicant type. Built in tips for each question would reduce confusion without lengthening submissions.</p></div>
           <div class="finding-card"><h4>Jury Process Entirely Manual</h4><p>Applications distributed via Dropbox, scores collected on paper. Manual spreadsheet compilation before every adjudication meeting.</p></div>
           <div class="finding-card"><h4>No Cross Department Visibility</h4><p>Each department uses different tools. Duplicate applicants discovered informally during jury discussions rather than caught systematically.</p></div>
-          <div class="finding-card"><h4>Post Award Work Underestimated</h4><p>Grant agreements, installment tracking, interim reports, and final reports are all handled manually with workload chronically underestimated.</p></div>
+          <div class="finding-card"><h4>Post Award Work Underestimated</h4><p>Grant agreements, installment tracking, interim reports, and final reports all handled manually with workload chronically underestimated.</p></div>
         </div>
       </div>
       <div class="cs-block">
@@ -454,16 +438,16 @@ footer p{font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:0.04em;font-
       <div class="cs-block">
         <h2>Project Documents</h2>
         <p>View the full journey map and project brochure produced as part of this engagement.</p>
-        <div class="doc-card" onclick="openPDF('https://joelvarghese-hack.github.io/Joel_Portfolio/Journey%20Map.pdf')">
+        <a class="doc-card" href="https://joelvarghese-hack.github.io/Joel_Portfolio/Journey%20Map.pdf" target="_blank" rel="noopener noreferrer">
           <div class="doc-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg></div>
-          <div class="doc-info"><h4>Internal Grant Staff Journey Map</h4><p>Click to open PDF</p></div>
+          <div class="doc-info"><h4>Internal Grant Staff Journey Map</h4><p>Click to open PDF in new tab</p></div>
           <span class="doc-arrow">&#8599;</span>
-        </div>
-        <div class="doc-card" onclick="openPDF('https://joelvarghese-hack.github.io/Joel_Portfolio/Kingston_Grants_Brochure_final.pdf.pdf')">
+        </a>
+        <a class="doc-card" href="https://joelvarghese-hack.github.io/Joel_Portfolio/Kingston_Grants_Brochure_final.pdf.pdf" target="_blank" rel="noopener noreferrer">
           <div class="doc-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg></div>
-          <div class="doc-info"><h4>City of Kingston Grants Portal Brochure</h4><p>Click to open PDF</p></div>
+          <div class="doc-info"><h4>City of Kingston Grants Portal Brochure</h4><p>Click to open PDF in new tab</p></div>
           <span class="doc-arrow">&#8599;</span>
-        </div>
+        </a>
       </div>
       <div class="outcome">
         <h3>Outcomes and Reflections</h3>
@@ -509,12 +493,16 @@ footer p{font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:0.04em;font-
   <footer><p>Joel Varghese</p><p>Kingston, ON 2025</p></footer>
 </div>
 
-
-<div id="pdf-overlay" onclick="if(event.target===this)closePDF()">
-  <div id="pdf-overlay-inner">
-    <button id="pdf-close" onclick="closePDF()">&#x2715;</button>
-    <iframe id="pdf-iframe" src=""></iframe>
-  </div>
-</div>
+<script>
+function showPage(id,btn){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.nav-links button').forEach(function(b){b.classList.remove('active');});
+  document.getElementById(id).classList.add('active');
+  if(btn) btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}
+function closeNav(){document.getElementById('navLinks').classList.remove('open');}
+</script>
 </body>
 </html>
