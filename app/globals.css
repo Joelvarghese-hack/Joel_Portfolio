@@ -50,298 +50,25 @@ html.lenis body {
 }
 
 /* ------------------------------------------------------------------ */
-/* Scroll stage: vertical by default (no JS, mobile, reduced motion). */
-/* JS sets data-mode="horizontal" on >= 768px when motion is allowed. */
+/* Scroll reveals: SSR markup is fully visible; the hiding class is    */
+/* only applied by JavaScript, so content always reads without JS.     */
 /* ------------------------------------------------------------------ */
 
-[data-stage] {
-  position: relative;
-}
-
-.stage-track {
-  position: relative;
-}
-
-[data-stage-panel] {
-  position: relative;
-  z-index: 1;
-}
-
-.path-canvas {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-[data-stage][data-mode='horizontal'] {
-  height: 100svh;
-  overflow: hidden;
-  background:
-    radial-gradient(1100px 700px at 85% -10%, rgba(26, 43, 74, 0.55), transparent 60%),
-    radial-gradient(900px 600px at -10% 105%, rgba(139, 30, 45, 0.22), transparent 55%),
-    var(--ink);
-}
-
-[data-mode='horizontal'] .stage-track {
-  display: flex;
-  align-items: stretch;
-  height: 100%;
-  width: max-content;
-  will-change: transform;
-}
-
-[data-mode='horizontal'] .path-canvas {
-  display: block;
-}
-
-[data-mode='horizontal'] [data-stage-panel] {
-  flex: 0 0 auto;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  padding: 88px clamp(48px, 7vw, 132px) 28px clamp(48px, 7vw, 132px);
-  margin-right: var(--panel-gap, 0px);
-}
-
-[data-mode='horizontal'] [data-stage-panel][data-hero] {
-  width: 100vw;
-  padding-left: clamp(24px, 8vw, 140px);
-  justify-content: flex-start;
-}
-
-[data-mode='horizontal'] [data-stage-panel]:last-child {
-  margin-right: max(8vw, calc(50vw - 300px));
-}
-
-@media (min-width: 768px) {
-  [data-mode='horizontal'] [data-node-card] {
-    width: var(--card-w, 420px);
-    max-width: none;
-    margin-left: 0;
-    margin-right: 0;
-  }
-  [data-mode='horizontal'] [data-stage-panel][data-hero] [data-node-card] {
-    width: auto;
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 1024px) {
-  [data-mode='horizontal'] [data-node-card] {
-    width: var(--card-l, 560px);
-  }
-}
-
-[data-mode='horizontal'] [data-node-card] {
-  max-height: calc(100svh - 124px);
-  overflow-y: auto;
-}
-
-/* ------------------------------------------------------ */
-/* The desktop path (SVG injected and driven client-side). */
-/* ------------------------------------------------------ */
-
-.path-main {
-  fill: none;
-  stroke: var(--velocity-red);
-  stroke-width: 3;
-  stroke-linecap: round;
-}
-
-.path-dot {
+.reveal-ready {
   opacity: 0;
-  transform: scale(0.4);
-  transform-box: fill-box;
-  transform-origin: center;
-  transition: opacity 0.4s ease-out, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(14px);
+  transition: opacity 0.5s ease-out, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.path-dot.on {
+.reveal-ready.is-in {
   opacity: 1;
-  transform: scale(1);
+  transform: none;
 }
 
-.path-branch {
-  opacity: 0;
-  transition: opacity 0.6s ease-out;
-}
-
-.path-branch.on {
-  opacity: 1;
-}
-
-.branch-base {
-  fill: none;
-  stroke: rgba(245, 241, 232, 0.14);
-  stroke-width: 2;
-}
-
-.branch-dash {
-  fill: none;
-  stroke: var(--velocity-red);
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-dasharray: 7 16;
-  animation: dash-flow 1.4s linear infinite;
-}
-
-@keyframes dash-flow {
-  to {
-    stroke-dashoffset: -23;
-  }
-}
-
-.branch-label {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  fill: rgba(245, 241, 232, 0.72);
-}
-
-/* Destination marker at the right edge of the quote card. Only meaningful
-   alongside the path, so it only renders in horizontal mode. */
-.dest-marker {
-  position: absolute;
-  top: 50%;
-  width: 22px;
-  height: 22px;
-  margin-top: -11px;
-  border-radius: 9999px;
-  background: var(--velocity-red);
-  border: 3px solid var(--amber-deep);
-  box-shadow: 0 0 0 0 rgba(230, 57, 70, 0);
-  display: none;
-  z-index: 2;
-}
-
-[data-mode='horizontal'] .dest-marker {
-  display: block;
-  right: calc(clamp(48px, 7vw, 132px) - 11px);
-}
-
-.dest-marker.is-arrived {
-  animation: dest-glow 1.2s ease-out 1;
-  box-shadow: 0 0 18px 2px rgba(230, 57, 70, 0.55);
-}
-
-@keyframes dest-glow {
-  0% {
-    box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.8);
-  }
-  70% {
-    box-shadow: 0 0 0 22px rgba(230, 57, 70, 0);
-  }
-  100% {
-    box-shadow: 0 0 18px 2px rgba(230, 57, 70, 0.55);
-  }
-}
-
-/* ------------------------------------------------------------------ */
-/* Mobile progress line: thin vertical line on the left edge with one */
-/* dot per section. Drawn progressively in vertical JS mode.          */
-/* ------------------------------------------------------------------ */
-
-.mline {
-  display: none;
-}
-
-@media (max-width: 767px) {
-  .mline {
-    display: block;
-    position: absolute;
-    left: 10px;
-    top: 12px;
-    bottom: 12px;
-    width: 2px;
-  }
-}
-
-.mline-track {
-  position: absolute;
-  inset: 0;
-  background: rgba(245, 241, 232, 0.1);
-}
-
-.mline-fill {
-  position: absolute;
-  inset: 0;
-  background: var(--velocity-red);
-  transform-origin: top;
-}
-
-.mline-dot {
-  position: absolute;
-  left: -3px;
-  top: 22px;
-  width: 8px;
-  height: 8px;
-  border-radius: 9999px;
-  background: var(--amber-pulse);
-  box-shadow: 0 0 0 2px var(--amber-deep);
-}
-
-/* Vertical JS mode: one-shot reveals per section. */
-[data-mode='vertical'] [data-reveal] {
-  transition: opacity 0.4s ease-out;
-}
-
-[data-mode='vertical'] [data-stage-panel]:not(.is-inview) [data-reveal] {
-  opacity: 0;
-}
-
-[data-mode='vertical'] .mline-fill {
-  transform: scaleY(0);
-  transition: transform 0.6s ease-out 0.05s;
-}
-
-[data-mode='vertical'] .is-inview .mline-fill {
-  transform: scaleY(1);
-}
-
-[data-mode='vertical'] .mline-dot {
-  opacity: 0;
-  transition: opacity 0.4s ease-out 0.2s;
-}
-
-[data-mode='vertical'] .is-inview .mline-dot {
-  opacity: 1;
-}
-
-/* ------------------------------------------------------------- */
-/* Reduced motion: vertical, static, content fades in once only. */
-/* ------------------------------------------------------------- */
-
-@media (prefers-reduced-motion: reduce) {
-  main {
-    animation: page-fade 0.4s ease-out 1;
-  }
-
-  [data-mode] [data-reveal],
-  [data-mode] .mline-dot {
-    opacity: 1 !important;
-    transition: none !important;
-  }
-
-  [data-mode] .mline-fill {
-    transform: none !important;
-    transition: none !important;
-  }
-
-  .branch-dash {
-    animation: none;
-  }
-
-  .dest-marker.is-arrived {
-    animation: none;
-  }
-
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
+/* Hero load-in: CSS keyframes so it ends visible even without JS. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-fade {
+    animation: page-fade 0.6s ease-out 1;
   }
 }
 
@@ -354,9 +81,152 @@ html.lenis body {
   }
 }
 
-/* Hero load-in: CSS keyframes so it ends visible even without JS. */
-@media (prefers-reduced-motion: no-preference) {
-  .hero-fade {
-    animation: page-fade 0.6s ease-out 1;
+/* ------------------------------------------------------------------ */
+/* Truck animation section. Three layout modes:                        */
+/*  - default (no JS, desktop reduced motion): milestone cards in a    */
+/*    2x2 grid, no canvas.                                             */
+/*  - mobile (< 768px): static vertical timeline with a thin left      */
+/*    connecting line and numbered cards.                              */
+/*  - data-truck="on" (>= 768px, motion allowed, JS): tall scroll      */
+/*    section, sticky 3D canvas, cards positioned along the road.      */
+/* ------------------------------------------------------------------ */
+
+.truck-section {
+  position: relative;
+  background-image: radial-gradient(rgba(245, 241, 232, 0.05) 1px, transparent 1.5px);
+  background-size: 28px 28px;
+}
+
+.truck-stage {
+  display: none;
+}
+
+.milestones {
+  display: grid;
+  gap: 1rem;
+  max-width: 56rem;
+  margin-inline: auto;
+  padding: 0 1.5rem 4rem;
+}
+
+@media (min-width: 768px) {
+  .truck-section:not([data-truck='on']) .milestones {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+}
+
+.milestone {
+  position: relative;
+  border: 1px solid rgba(245, 241, 232, 0.1);
+  background: rgba(21, 21, 27, 0.92);
+  border-radius: 1rem;
+  padding: 1.25rem 1.4rem;
+}
+
+/* Mobile: static process timeline with connecting line. */
+@media (max-width: 767px) {
+  .milestones {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .milestones::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 14px;
+    bottom: 14px;
+    width: 2px;
+    background: rgba(245, 241, 232, 0.12);
+  }
+  .milestone::before {
+    content: '';
+    position: absolute;
+    left: -27px;
+    top: 26px;
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: var(--amber-pulse);
+    box-shadow: 0 0 0 2px var(--amber-deep);
+  }
+}
+
+/* Scroll-driven 3D mode. */
+.truck-section[data-truck='on'] {
+  height: 430svh;
+}
+
+.truck-section[data-truck='on'] > h2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+}
+
+.truck-section[data-truck='on'] .truck-stage {
+  display: block;
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  z-index: 0;
+}
+
+.truck-section[data-truck='on'] .milestones {
+  display: block;
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  padding: 0;
+  margin: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.truck-section[data-truck='on'] .milestone {
+  position: absolute;
+  top: var(--mt, 50%);
+  width: min(340px, 38vw);
+  pointer-events: auto;
+  opacity: 0;
+  transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.truck-section[data-truck='on'] .milestone[data-side='left'] {
+  left: max(5vw, calc(50vw - 480px));
+  transform: translateX(-30px);
+}
+
+.truck-section[data-truck='on'] .milestone[data-side='right'] {
+  right: max(5vw, calc(50vw - 480px));
+  transform: translateX(30px);
+}
+
+.truck-section[data-truck='on'] .milestone.is-passed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ------------------------------------------------------------- */
+/* Reduced motion: static everywhere, content fades in once only. */
+/* ------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  main {
+    animation: page-fade 0.4s ease-out 1;
+  }
+
+  .reveal-ready,
+  .truck-section[data-truck='on'] .milestone {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
   }
 }

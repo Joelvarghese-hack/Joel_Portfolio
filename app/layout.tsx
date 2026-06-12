@@ -1,5 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import Nav from "@/components/nav/Nav";
+import Footer from "@/components/footer/Footer";
+import ScrollTopButton from "@/components/scroll/ScrollTopButton";
+import SmoothScroll from "@/components/scroll/SmoothScroll";
 import "./globals.css";
 
 const bricolage = localFont({
@@ -25,7 +29,13 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={bricolage.variable}>
-      <body className="bg-ink font-sans text-paper antialiased">{children}</body>
+      <body className="bg-ink font-sans text-paper antialiased">
+        <Nav />
+        {children}
+        <Footer />
+        <ScrollTopButton />
+        <SmoothScroll />
+      </body>
     </html>
   );
 }

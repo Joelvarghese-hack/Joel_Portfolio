@@ -1,15 +1,19 @@
 # Bitlane Relocations
 
-Single-page marketing site for Bitlane Relocations, a moving company based in
-Kingston, Ontario. One page, no multi-page routing.
+Marketing site for Bitlane Relocations, a moving company based in Kingston,
+Ontario. Homepage with a scroll-driven 3D truck animation, plus five static
+inner pages.
 
 ## Stack
 
 - Next.js 14 (App Router) + TypeScript
 - Tailwind CSS
-- GSAP + ScrollTrigger (pinned horizontal scroll stage and path drawing)
+- Three.js + React Three Fiber + drei (truck animation only)
+- @react-three/postprocessing (bloom on the trail and truck highlights)
+- @react-spring/three (truck weight and inertia) + maath (damping)
+- GSAP + ScrollTrigger (scroll-to-progress bridge)
 - Lenis (smooth scroll)
-- Framer Motion (card tilt and CTA micro-interactions)
+- Framer Motion (inner page micro-interactions)
 - Bricolage Grotesque variable font, self-hosted from `public/fonts`
 
 ## Run
@@ -21,6 +25,30 @@ npm run build  # production build
 npm run start  # serve the production build
 ```
 
+## Pages
+
+| Route | Content |
+| --- | --- |
+| `/` | Hero, truck scroll animation (Our Process), quote form, Why Bitlane, What We Move, Service Area, coverage stats |
+| `/services` | 8 expanded service cards with starting prices |
+| `/about` | Company copy and stats |
+| `/process` | The four steps in long form |
+| `/coverage` | Six cities with distance notes |
+| `/contact` | Contact details and the shared quote form |
+
+## Behavior
+
+- Desktop (>= 768px): the homepage process section pins a Three.js canvas.
+  A low-poly red truck drives a curved road as you scroll, leaving a glowing
+  trail; four milestone cards reveal as it passes; a rotating red pin marks
+  the destination.
+- Mobile (< 768px): the canvas never mounts. The process renders as a static
+  numbered timeline with a thin connecting line.
+- `prefers-reduced-motion: reduce`: no canvas, milestone cards in a 2x2 grid,
+  everything static.
+- Without JavaScript the page renders as a fully readable document and the
+  quote form still submits via `mailto:`.
+
 ## Deployment (GitHub Pages)
 
 Every push to `main` runs `.github/workflows/deploy-pages.yml`, which builds a
@@ -29,22 +57,7 @@ publishes it to GitHub Pages:
 
 https://joelvarghese-hack.github.io/Bitlane-Website/
 
-If the first run cannot enable Pages by itself, enable it once in the repo:
-Settings, then Pages, then set Source to "GitHub Actions".
-
-## Behavior
-
-- Desktop and tablet (>= 768px): pinned horizontal scroll stage. A continuous
-  red SVG path connects six nodes (Hero, Why, What We Move, The Process,
-  Service Area, Quote) and draws with scroll. The Service Area node spawns the
-  animated Kingston to Toronto to Ottawa to Montreal route polyline.
-- Mobile (< 768px): plain vertical scroll with a thin progress line on the
-  left edge, one dot per section.
-- `prefers-reduced-motion: reduce`: vertical and static everywhere.
-- Without JavaScript the page renders as a fully readable vertical document
-  and the quote form still submits via `mailto:`.
-
 ## TODO before launch
 
-The quote form posts to a placeholder address defined once in
-`lib/formSubmit.ts` (`QUOTE_EMAIL`). Swap it with the real quotes inbox.
+- Replace the placeholder email in `lib/formSubmit.ts` (`QUOTE_EMAIL`).
+- Replace the placeholder service pricing in `app/services/page.tsx`.

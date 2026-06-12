@@ -1,5 +1,5 @@
-// TODO: swap this placeholder with the real Bitlane quotes inbox before launch.
-export const QUOTE_EMAIL = "bitlane-relocations-quotes@placeholder.com";
+// TODO: replace with real email
+export const QUOTE_EMAIL = "info@bitlane-relocations.ca";
 
 const FIELD_ORDER = [
   "Full Name",

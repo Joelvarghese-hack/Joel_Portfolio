@@ -21,7 +21,7 @@ export default function WhyBitlane() {
       <h2 className="text-3xl font-extrabold tracking-tight text-paper md:text-4xl">
         Why Bitlane
       </h2>
-      <div className="mt-6 grid gap-4">
+      <div className="mt-6 grid gap-4 md:grid-cols-3">
         {DIFFERENTIATORS.map((item) => (
           <DifferentiatorCard key={item.title} title={item.title} body={item.body} />
         ))}

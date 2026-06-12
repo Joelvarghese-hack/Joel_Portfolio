@@ -8,7 +8,7 @@ const basePath = process.env.PAGES_BASE_PATH ?? "";
 
 const nextConfig = {
   reactStrictMode: true,
-  ...(isStaticExport ? { output: "export", basePath } : {}),
+  ...(isStaticExport ? { output: "export", basePath, trailingSlash: true } : {}),
 };
 
 export default nextConfig;

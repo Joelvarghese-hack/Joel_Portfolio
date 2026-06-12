@@ -1,12 +1,13 @@
+import Link from "next/link";
 import LogoLockup from "@/components/nav/LogoLockup";
 import { QUOTE_EMAIL } from "@/lib/formSubmit";
 
 const FOOTER_LINKS = [
-  { href: "#services", label: "Services" },
-  { href: "#why", label: "Why Us" },
-  { href: "#process", label: "How It Works" },
-  { href: "#area", label: "Service Area" },
-  { href: "#quote", label: "Get a Quote" },
+  { href: "/services", label: "Services" },
+  { href: "/about", label: "About" },
+  { href: "/process", label: "Process" },
+  { href: "/coverage", label: "Coverage" },
+  { href: "/contact", label: "Contact" },
 ];
 
 const FOOTER_CITIES = [
@@ -53,13 +54,13 @@ export default function Footer() {
         <nav aria-label="Footer">
           <ul className="grid content-start gap-3 text-sm">
             {FOOTER_LINKS.map((link) => (
-              <li key={link.href + link.label}>
-                <a
+              <li key={link.href}>
+                <Link
                   href={link.href}
                   className="text-paper/85 transition-colors hover:text-amber-pulse"
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

@@ -1,68 +1,51 @@
-import Nav from "@/components/nav/Nav";
 import Hero from "@/components/hero/Hero";
+import TruckSection from "@/components/truck/TruckSection";
+import QuoteForm from "@/components/quote/QuoteForm";
 import WhyBitlane from "@/components/why/WhyBitlane";
 import WhatWeMove from "@/components/services/WhatWeMove";
-import TheProcess from "@/components/process/TheProcess";
 import ServiceArea from "@/components/area/ServiceArea";
 import CoverageStats from "@/components/stats/CoverageStats";
-import QuoteForm from "@/components/quote/QuoteForm";
-import Footer from "@/components/footer/Footer";
-import HorizontalStage from "@/components/scroll/HorizontalStage";
-import PathNode from "@/components/scroll/PathNode";
+import Reveal from "@/components/scroll/Reveal";
+
+const CARD =
+  "rounded-2xl border border-paper/10 bg-[#15151B]/95 p-6 md:p-8 shadow-[0_30px_70px_-32px_rgba(139,30,45,0.5)]";
 
 export default function Home() {
   return (
-    <>
-      <Nav />
-      <main>
-        <HorizontalStage>
-          <PathNode id="hero" isNode nodeY={0.52} anchor="right" hero>
-            <Hero />
-          </PathNode>
+    <main>
+      <Hero />
 
-          <PathNode id="why" isNode nodeY={0.3} cardMd="420px" cardLg="540px">
-            <WhyBitlane />
-          </PathNode>
+      <TruckSection />
 
-          <PathNode id="services" isNode nodeY={0.68} cardMd="440px" cardLg="560px">
-            <WhatWeMove />
-          </PathNode>
+      <section id="quote-section" className="px-6 py-16 md:py-24">
+        <Reveal className={`mx-auto w-full max-w-2xl ${CARD}`}>
+          <QuoteForm />
+        </Reveal>
+      </section>
 
-          <PathNode id="process" isNode nodeY={0.32} cardMd="420px" cardLg="520px">
-            <TheProcess />
-          </PathNode>
+      <section id="why" className="px-6 py-16 md:py-24">
+        <Reveal className="mx-auto w-full max-w-5xl">
+          <WhyBitlane />
+        </Reveal>
+      </section>
 
-          <PathNode
-            id="area"
-            isNode
-            nodeY={0.62}
-            anchor="right"
-            routeBranch
-            gap="clamp(380px, 36vw, 600px)"
-            cardMd="400px"
-            cardLg="500px"
-          >
-            <ServiceArea />
-          </PathNode>
+      <section id="services" className="px-6 py-16 md:py-24">
+        <Reveal className="mx-auto w-full max-w-5xl">
+          <WhatWeMove />
+        </Reveal>
+      </section>
 
-          <PathNode id="stats" cardMd="560px" cardLg="760px" ariaLabel="Coverage">
-            <CoverageStats />
-          </PathNode>
+      <section id="area" className="px-6 py-16 md:py-24">
+        <Reveal className={`mx-auto w-full max-w-2xl ${CARD}`}>
+          <ServiceArea />
+        </Reveal>
+      </section>
 
-          <PathNode
-            id="quote"
-            isNode
-            nodeY={0.5}
-            anchor="in-right"
-            destination
-            cardMd="440px"
-            cardLg="560px"
-          >
-            <QuoteForm />
-          </PathNode>
-        </HorizontalStage>
-      </main>
-      <Footer />
-    </>
+      <section aria-label="Coverage" className="px-6 py-16 md:py-24">
+        <Reveal className="mx-auto w-full max-w-4xl">
+          <CoverageStats />
+        </Reveal>
+      </section>
+    </main>
   );
 }
