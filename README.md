@@ -21,6 +21,17 @@ npm run build  # production build
 npm run start  # serve the production build
 ```
 
+## Deployment (GitHub Pages)
+
+Every push to `main` runs `.github/workflows/deploy-pages.yml`, which builds a
+static export (`STATIC_EXPORT=1`, `PAGES_BASE_PATH=/Bitlane-Website`) and
+publishes it to GitHub Pages:
+
+https://joelvarghese-hack.github.io/Bitlane-Website/
+
+If the first run cannot enable Pages by itself, enable it once in the repo:
+Settings, then Pages, then set Source to "GitHub Actions".
+
 ## Behavior
 
 - Desktop and tablet (>= 768px): pinned horizontal scroll stage. A continuous
