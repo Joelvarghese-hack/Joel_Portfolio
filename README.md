@@ -51,11 +51,18 @@ npm run start  # serve the production build
 
 ## Deployment (GitHub Pages)
 
-Every push to `main` runs `.github/workflows/deploy-pages.yml`, which builds a
-static export (`STATIC_EXPORT=1`, `PAGES_BASE_PATH=/Bitlane-Website`) and
-publishes it to GitHub Pages:
+The static export is prebuilt and committed to `dist/`. Every push to `main`
+runs `.github/workflows/deploy-pages.yml`, which publishes `dist/` to GitHub
+Pages directly (no build on CI):
 
 https://joelvarghese-hack.github.io/Bitlane-Website/
+
+To regenerate `dist/` after changing the site:
+
+```bash
+STATIC_EXPORT=1 PAGES_BASE_PATH=/Bitlane-Website npm run build
+rm -rf dist && cp -r out dist
+```
 
 ## TODO before launch
 

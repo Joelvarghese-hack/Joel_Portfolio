@@ -1,5 +1,7 @@
 name: Deploy to GitHub Pages
 
+# Publishes the prebuilt static export committed in dist/. The site is built
+# and verified before each push, so this workflow has no Node or npm steps.
 on:
   push:
     branches: [main]
@@ -15,32 +17,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-      - uses: actions/configure-pages@v5
-        with:
-          enablement: true
-      - run: npm ci
-      - run: npm run build
-        env:
-          STATIC_EXPORT: "1"
-          PAGES_BASE_PATH: /Bitlane-Website
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: out
-
   deploy:
-    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
       - id: deployment
         uses: actions/deploy-pages@v4

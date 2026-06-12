@@ -5,6 +5,9 @@
 /.next/
 /out/
 
+# prebuilt pages export (committed only on the bitlane-website branch)
+/dist/
+
 # misc
 .DS_Store
 *.pem
