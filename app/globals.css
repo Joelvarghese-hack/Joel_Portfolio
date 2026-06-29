@@ -1,0 +1,252 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --green: #1FBF4B;
+  --green-deep: #128A37;
+  --green-dark: #0E6E2C;
+  --green-lime: #3BD865;
+  --grape: #8B5CF6;
+  --ink: #0C0A0A;
+  --paper: #FFFFFF;
+  --mist: #F2F4EF;
+  --cloud: #E5E8E1;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background: var(--green);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 3px solid var(--green-deep);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Heavy display headings, Pure-Movers style. */
+.display {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------------ */
+/* Scroll reveal: hidden state added only by JS, so no-JS reads fully. */
+/* ------------------------------------------------------------------ */
+
+.reveal-ready {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s ease-out, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-ready.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-fade {
+    animation: fade-in 0.6s ease-out 1;
+  }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ------------------------------------------------------------------ */
+/* Marquee banner: repeating brand text on a green strip.             */
+/* ------------------------------------------------------------------ */
+
+.marquee {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: 0;
+  background: var(--green);
+}
+.marquee__track {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.7rem 0.75rem;
+  white-space: nowrap;
+  animation: marquee-x 26s linear infinite;
+}
+.marquee--reverse .marquee__track {
+  animation-direction: reverse;
+}
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Truck animation section (recolored green). Same three modes:        */
+/*  default / reduced motion: 2x2 card grid, no canvas                 */
+/*  mobile: static vertical timeline                                   */
+/*  data-truck="on": tall scroll section + sticky canvas               */
+/* ------------------------------------------------------------------ */
+
+.truck-section {
+  position: relative;
+  background:
+    radial-gradient(900px 500px at 80% 0%, rgba(31, 191, 75, 0.16), transparent 60%),
+    #0B130D;
+  background-image:
+    radial-gradient(900px 500px at 80% 0%, rgba(31, 191, 75, 0.16), transparent 60%),
+    radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1.5px);
+  background-size: auto, 28px 28px;
+}
+
+.truck-stage {
+  display: none;
+}
+
+.milestones {
+  display: grid;
+  gap: 1rem;
+  max-width: 56rem;
+  margin-inline: auto;
+  padding: 0 1.5rem 4rem;
+}
+
+@media (min-width: 768px) {
+  .truck-section:not([data-truck='on']) .milestones {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+}
+
+.milestone {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 1.25rem;
+  padding: 1.4rem 1.5rem;
+}
+
+@media (max-width: 767px) {
+  .milestones {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .milestones::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 14px;
+    bottom: 14px;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.16);
+  }
+  .milestone::before {
+    content: '';
+    position: absolute;
+    left: -27px;
+    top: 28px;
+    width: 9px;
+    height: 9px;
+    border-radius: 9999px;
+    background: var(--green);
+    box-shadow: 0 0 0 3px rgba(31, 191, 75, 0.3);
+  }
+}
+
+.truck-section[data-truck='on'] {
+  height: 430svh;
+}
+.truck-section[data-truck='on'] > h2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+}
+.truck-section[data-truck='on'] .truck-stage {
+  display: block;
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  z-index: 0;
+}
+.truck-section[data-truck='on'] .milestones {
+  display: block;
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  padding: 0;
+  margin: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+.truck-section[data-truck='on'] .milestone {
+  position: absolute;
+  top: var(--mt, 50%);
+  width: min(340px, 38vw);
+  pointer-events: auto;
+  opacity: 0;
+  transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.truck-section[data-truck='on'] .milestone[data-side='left'] {
+  left: max(5vw, calc(50vw - 480px));
+  transform: translateX(-30px);
+}
+.truck-section[data-truck='on'] .milestone[data-side='right'] {
+  right: max(5vw, calc(50vw - 480px));
+  transform: translateX(30px);
+}
+.truck-section[data-truck='on'] .milestone.is-passed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ------------------------------------------------------------- */
+/* Reduced motion: static everywhere, content visible.            */
+/* ------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-ready,
+  .truck-section[data-truck='on'] .milestone {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+  }
+}
