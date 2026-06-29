@@ -10,12 +10,12 @@ import { damp } from "maath/easing";
 
 export type ProgressRef = MutableRefObject<number>;
 
-const RED = "#E63946";
-const CRIMSON = "#8B1E2D";
-const AMBER = "#F4A261";
-const GOLD = "#C9A961";
-const NAVY = "#1A2B4A";
-const PAPER = "#F5F1E8";
+const RED = "#1FBF4B"; // brand green (truck body, trail core, pin)
+const CRIMSON = "#0E6E2C"; // deep green (pin shadow)
+const AMBER = "#3BD865"; // lime (trail glow)
+const GOLD = "#FFFFFF"; // white cab
+const NAVY = "#0C0A0A"; // ink windshield
+const PAPER = "#EAF6EE"; // light road lines
 
 const TILT = -0.42;
 

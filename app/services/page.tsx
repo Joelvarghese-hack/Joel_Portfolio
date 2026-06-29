@@ -82,7 +82,7 @@ export default function ServicesPage() {
         <div className="mx-auto mt-10 max-w-4xl">
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center rounded-full bg-velocity-red px-6 py-3 text-sm font-bold text-paper transition-colors hover:bg-crimson-shadow"
+            className="inline-flex items-center justify-center rounded-full bg-green px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-white transition-colors hover:bg-green-deep"
           >
             Get a quote
           </Link>

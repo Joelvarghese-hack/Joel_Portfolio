@@ -22,21 +22,21 @@ export default function CoveragePage() {
       <PageHero title="Service Area" lede="Where we operate, and how far we'll go." />
       <section className="px-6 pb-16 md:pb-24">
         <div className="mx-auto max-w-2xl">
-          <p className="text-base leading-relaxed text-paper/75">
+          <p className="text-base leading-relaxed text-ink/65">
             We primarily serve Ontario, with cross-border moves to Québec. For
             moves outside this area, call us to discuss.
           </p>
-          <ul className="mt-8 grid gap-4 rounded-2xl border border-paper/10 bg-[#15151B]/95 p-6 md:p-8">
+          <ul className="mt-8 grid gap-4 rounded-2xl border border-cloud bg-paper p-6 shadow-sm md:p-8">
             {CITIES.map((city) => (
-              <li key={city.name} className="flex items-baseline justify-between gap-4">
-                <span className="text-base font-bold text-paper md:text-lg">{city.name}</span>
-                <span className="text-sm text-paper/60">{city.note}</span>
+              <li key={city.name} className="flex items-baseline justify-between gap-4 border-b border-cloud pb-3 last:border-0 last:pb-0">
+                <span className="text-base font-extrabold text-ink md:text-lg">{city.name}</span>
+                <span className="text-sm text-ink/55">{city.note}</span>
               </li>
             ))}
           </ul>
           <a
             href="tel:+16137701638"
-            className="mt-10 inline-flex items-center justify-center rounded-full bg-velocity-red px-6 py-3 text-sm font-bold text-paper transition-colors hover:bg-crimson-shadow"
+            className="mt-10 inline-flex items-center justify-center rounded-full bg-green px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-white transition-colors hover:bg-green-deep"
           >
             Call (613) 770-1638
           </a>
