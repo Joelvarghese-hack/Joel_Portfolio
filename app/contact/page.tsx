@@ -22,7 +22,7 @@ export default function ContactPage() {
             <li>
               <a
                 href="tel:+16137701638"
-                className="font-semibold text-paper transition-colors hover:text-amber-pulse"
+                className="font-bold text-ink transition-colors hover:text-green-deep"
               >
                 (613) 770-1638
               </a>
@@ -30,15 +30,15 @@ export default function ContactPage() {
             <li>
               <a
                 href={`mailto:${QUOTE_EMAIL}`}
-                className="break-all font-semibold text-paper transition-colors hover:text-amber-pulse"
+                className="break-all font-bold text-ink transition-colors hover:text-green-deep"
               >
                 {QUOTE_EMAIL}
               </a>
             </li>
-            <li className="text-paper/65">Mon to Sat, 8am to 7pm EST</li>
-            <li className="text-paper/65">Kingston, Ontario, Canada</li>
+            <li className="text-ink/60">Mon to Sat, 8am to 7pm EST</li>
+            <li className="text-ink/60">Kingston, Ontario, Canada</li>
           </ul>
-          <div className="mt-10 rounded-2xl border border-paper/10 bg-[#15151B]/95 p-6 md:p-8">
+          <div className="mt-10 rounded-2xl border border-cloud bg-paper p-6 shadow-sm md:p-8">
             <QuoteForm />
           </div>
         </div>

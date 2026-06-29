@@ -7,13 +7,14 @@ const STATS = [
 
 export default function CoverageStats() {
   return (
-    <dl className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4">
+    <dl className="grid grid-cols-2 gap-4 md:grid-cols-4">
       {STATS.map((stat) => (
-        <div key={stat.label} className="flex flex-col text-center">
-          <dd className="order-1 text-4xl font-extrabold tracking-tight text-paper lg:text-5xl">
-            {stat.value}
-          </dd>
-          <dt className="order-2 mt-2 text-xs text-paper/60 md:text-sm">{stat.label}</dt>
+        <div
+          key={stat.label}
+          className="flex flex-col rounded-2xl border border-cloud bg-mist p-5 text-center"
+        >
+          <dd className="display order-1 text-3xl text-green-deep lg:text-4xl">{stat.value}</dd>
+          <dt className="order-2 mt-2 text-xs text-ink/55 md:text-sm">{stat.label}</dt>
         </div>
       ))}
     </dl>

@@ -13,25 +13,25 @@ const MOVE_TYPES = [
 ];
 
 const INPUT_CLASS =
-  "w-full rounded-lg border border-paper/15 bg-[#101014] px-3.5 py-2.5 text-sm text-paper placeholder:text-paper/35";
+  "w-full rounded-xl border border-cloud bg-mist px-3.5 py-2.5 text-sm text-ink placeholder:text-ink/35 focus:border-green focus:bg-paper";
 
-const LABEL_CLASS = "mb-1.5 block text-sm font-medium text-paper/80";
+const LABEL_CLASS = "mb-1.5 block text-sm font-semibold text-ink/70";
 
 export default function QuoteForm() {
   return (
     <div>
-      <h2 className="text-2xl font-extrabold tracking-tight text-paper md:text-3xl">
-        Get a free quote in under 2 minutes.
+      <h2 className="display text-2xl text-ink md:text-3xl">
+        Get a free quote in under 2 minutes
       </h2>
-      <p className="mt-3 text-sm leading-relaxed text-paper/65">
+      <p className="mt-3 text-sm leading-relaxed text-ink/60">
         Tell us where you&apos;re moving from and to, and we&apos;ll put together an
         upfront price. No surprises, no pressure.
       </p>
-      <p className="mt-2 text-sm text-paper/65">
+      <p className="mt-2 text-sm text-ink/60">
         Prefer to talk?{" "}
         <a
           href="tel:+16137701638"
-          className="font-semibold text-amber-pulse transition-colors hover:text-paper"
+          className="font-bold text-green-deep transition-colors hover:underline"
         >
           (613) 770-1638
         </a>
@@ -120,13 +120,13 @@ export default function QuoteForm() {
           </div>
           <div className="sm:col-span-2">
             <label htmlFor="q-date" className={LABEL_CLASS}>
-              Preferred Date <span className="text-paper/45">(optional)</span>
+              Preferred Date <span className="text-ink/45">(optional)</span>
             </label>
             <input id="q-date" name="Preferred Date" type="date" className={INPUT_CLASS} />
           </div>
           <div className="sm:col-span-2">
             <label htmlFor="q-notes" className={LABEL_CLASS}>
-              Additional Notes <span className="text-paper/45">(optional)</span>
+              Additional Notes <span className="text-ink/45">(optional)</span>
             </label>
             <textarea
               id="q-notes"
@@ -140,11 +140,11 @@ export default function QuoteForm() {
 
         <button
           type="submit"
-          className="mt-5 w-full rounded-full bg-velocity-red px-7 py-3.5 text-sm font-bold text-paper transition-colors hover:bg-crimson-shadow md:text-base"
+          className="mt-5 w-full rounded-full bg-green px-7 py-3.5 text-sm font-extrabold uppercase tracking-wide text-white shadow-md transition-colors hover:bg-green-deep md:text-base"
         >
           Get My Free Quote
         </button>
-        <p className="mt-3 text-center text-xs text-paper/55">
+        <p className="mt-3 text-center text-xs text-ink/50">
           No commitment required. We&apos;ll respond within a few hours.
         </p>
       </form>

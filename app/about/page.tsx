@@ -16,7 +16,7 @@ export default function AboutPage() {
         lede="A Kingston moving company built on fixed prices and careful hands."
       />
       <section className="px-6 pb-16 md:pb-24">
-        <div className="mx-auto max-w-3xl space-y-5 text-base leading-relaxed text-paper/75">
+        <div className="mx-auto max-w-3xl space-y-5 text-base leading-relaxed text-ink/70">
           <p>
             Bitlane Relocations is a moving company based in Kingston, Ontario.
             We started in 2022 with one truck and a simple position: moving day

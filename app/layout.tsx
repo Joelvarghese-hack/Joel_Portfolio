@@ -6,30 +6,30 @@ import ScrollTopButton from "@/components/scroll/ScrollTopButton";
 import SmoothScroll from "@/components/scroll/SmoothScroll";
 import "./globals.css";
 
-const bricolage = localFont({
-  src: "../public/fonts/BricolageGrotesque-Variable.woff2",
-  weight: "200 800",
+const hanken = localFont({
+  src: "../public/fonts/HankenGrotesk-Variable.woff2",
+  weight: "100 900",
   style: "normal",
   display: "swap",
-  variable: "--font-bricolage",
+  variable: "--font-hanken",
 });
 
 export const metadata: Metadata = {
-  title: "Bitlane Relocations | Stress Free Moving Experience",
+  title: "Bitlane Relocations | Full-Service Movers in Kingston, Ontario",
   description:
-    "Moving, made simple. Relocations across Ontario, from Kingston to Toronto, Ottawa, and beyond. Upfront pricing, careful hands, zero stress.",
+    "Comprehensive full-service movers. We handle every step of your move. Affordable moving and storage across Ontario, from Kingston to Toronto, Ottawa, and beyond.",
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0E0E10",
+  themeColor: "#1FBF4B",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={bricolage.variable}>
-      <body className="bg-ink font-sans text-paper antialiased">
+    <html lang="en" className={hanken.variable}>
+      <body className="bg-paper font-sans text-ink">
         <Nav />
         {children}
         <Footer />

@@ -1,16 +1,20 @@
 import Link from "next/link";
 import LogoLockup from "@/components/nav/LogoLockup";
+import Marquee from "@/components/ui/Marquee";
 import { QUOTE_EMAIL } from "@/lib/formSubmit";
 
-const FOOTER_LINKS = [
-  { href: "/services", label: "Services" },
-  { href: "/about", label: "About" },
-  { href: "/process", label: "Process" },
-  { href: "/coverage", label: "Coverage" },
-  { href: "/contact", label: "Contact" },
+const SERVICES = [
+  "Residential moving",
+  "Long-distance moving",
+  "Office relocations",
+  "Packing services",
+  "Furniture assembly",
+  "Storage solutions",
+  "Same-day moves",
+  "Local Kingston moves",
 ];
 
-const FOOTER_CITIES = [
+const CITIES = [
   "Kingston ON",
   "Toronto ON",
   "Ottawa ON",
@@ -19,66 +23,85 @@ const FOOTER_CITIES = [
   "Brockville ON",
 ];
 
+const COMPANY = [
+  { href: "/about", label: "About" },
+  { href: "/process", label: "Process" },
+  { href: "/coverage", label: "Coverage" },
+  { href: "/contact", label: "Contact" },
+  { href: "/#quote", label: "Get a quote" },
+];
+
 export default function Footer() {
   return (
-    <footer className="bg-[#0A0A0C] px-6 py-14 md:px-10 lg:px-16">
-      <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <LogoLockup />
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-paper/65">
+    <footer className="bg-ink text-white">
+      <Marquee />
+
+      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-2 lg:grid-cols-5 lg:px-8">
+        <div className="lg:col-span-2">
+          <LogoLockup onDark />
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
             Stress-free relocations across Ontario. Based in Kingston since 2022.
+            Licensed and insured.
           </p>
-          <p className="mt-3 text-sm font-semibold text-paper/80">Licensed and Insured</p>
+          <a
+            href="#quote"
+            className="mt-5 inline-flex items-center justify-center rounded-full bg-green px-5 py-2.5 text-xs font-extrabold uppercase tracking-wide text-white transition-colors hover:bg-green-deep"
+          >
+            Get a free quote
+          </a>
         </div>
 
-        <ul className="grid content-start gap-3 text-sm">
-          <li>
-            <a
-              href="tel:+16137701638"
-              className="font-semibold text-paper/85 transition-colors hover:text-amber-pulse"
-            >
-              (613) 770-1638
-            </a>
-          </li>
-          <li>
-            <a
-              href={`mailto:${QUOTE_EMAIL}`}
-              className="break-all text-paper/85 transition-colors hover:text-amber-pulse"
-            >
-              {QUOTE_EMAIL}
-            </a>
-          </li>
-          <li className="text-paper/65">Kingston, Ontario, Canada</li>
-        </ul>
-
-        <nav aria-label="Footer">
-          <ul className="grid content-start gap-3 text-sm">
-            {FOOTER_LINKS.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="text-paper/85 transition-colors hover:text-amber-pulse"
-                >
-                  {link.label}
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-green-lime">Services</p>
+          <ul className="mt-4 grid gap-2.5 text-sm text-white/65">
+            {SERVICES.map((s) => (
+              <li key={s}>
+                <Link href="/services" className="transition-colors hover:text-white">
+                  {s}
                 </Link>
               </li>
             ))}
           </ul>
-        </nav>
+        </div>
 
         <div>
-          <p className="text-sm font-bold text-paper">Service Area</p>
-          <ul className="mt-3 grid gap-2 text-sm text-paper/65">
-            {FOOTER_CITIES.map((city) => (
-              <li key={city}>{city}</li>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-green-lime">Service area</p>
+          <ul className="mt-4 grid gap-2.5 text-sm text-white/65">
+            {CITIES.map((c) => (
+              <li key={c}>{c}</li>
             ))}
           </ul>
         </div>
+
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-green-lime">Company</p>
+          <ul className="mt-4 grid gap-2.5 text-sm text-white/65">
+            {COMPANY.map((c) => (
+              <li key={c.href + c.label}>
+                <Link href={c.href} className="transition-colors hover:text-white">
+                  {c.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-6 grid gap-2 text-sm">
+            <a href="tel:+16137701638" className="font-bold text-white hover:text-green-lime">
+              (613) 770-1638
+            </a>
+            <a href={`mailto:${QUOTE_EMAIL}`} className="break-all text-white/65 hover:text-white">
+              {QUOTE_EMAIL}
+            </a>
+            <span className="text-white/50">Kingston, Ontario, Canada</span>
+          </div>
+        </div>
       </div>
 
-      <p className="mx-auto mt-12 max-w-6xl text-xs text-paper/45">
-        © 2026 Bitlane Relocations. All rights reserved.
-      </p>
+      <div className="border-t border-white/10">
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-6 py-5 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between lg:px-8">
+          <p>© 2026 Bitlane Relocations. All rights reserved.</p>
+          <p>Mon to Sat, 8am to 7pm EST</p>
+        </div>
+      </div>
     </footer>
   );
 }

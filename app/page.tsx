@@ -1,50 +1,62 @@
-import Hero from "@/components/hero/Hero";
+import Hero from "@/components/home/Hero";
+import Clients from "@/components/home/Clients";
+import GetsIt from "@/components/home/GetsIt";
+import ReliableMovers from "@/components/home/ReliableMovers";
+import Includes from "@/components/home/Includes";
+import Advantages from "@/components/home/Advantages";
+import Checklist from "@/components/home/Checklist";
 import TruckSection from "@/components/truck/TruckSection";
-import QuoteForm from "@/components/quote/QuoteForm";
-import WhyBitlane from "@/components/why/WhyBitlane";
-import WhatWeMove from "@/components/services/WhatWeMove";
-import ServiceArea from "@/components/area/ServiceArea";
-import CoverageStats from "@/components/stats/CoverageStats";
+import AboutBlock from "@/components/home/AboutBlock";
+import Faq from "@/components/home/Faq";
+import Blog from "@/components/home/Blog";
+import Marquee from "@/components/ui/Marquee";
 import Reveal from "@/components/scroll/Reveal";
-
-const CARD =
-  "rounded-2xl border border-paper/10 bg-[#15151B]/95 p-6 md:p-8 shadow-[0_30px_70px_-32px_rgba(139,30,45,0.5)]";
+import QuoteForm from "@/components/quote/QuoteForm";
 
 export default function Home() {
   return (
     <main>
       <Hero />
-
+      <Clients />
+      <GetsIt />
+      <ReliableMovers />
+      <Includes />
+      <Advantages />
+      <Checklist />
+      <Marquee />
       <TruckSection />
+      <AboutBlock />
+      <Marquee reverse />
+      <Faq />
+      <Blog />
 
-      <section id="quote-section" className="px-6 py-16 md:py-24">
-        <Reveal className={`mx-auto w-full max-w-2xl ${CARD}`}>
-          <QuoteForm />
-        </Reveal>
-      </section>
+      <section id="quote" className="bg-green px-6 py-16 md:py-24">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2">
+          <Reveal>
+            <h2 className="display text-[clamp(2rem,4.8vw,3.4rem)] text-white">
+              Ready when you are
+            </h2>
+            <p className="mt-4 max-w-md text-white/85">
+              Send a few details and we will put together a fixed upfront price,
+              usually the same day. No commitment, no pressure.
+            </p>
+            <ul className="mt-6 grid gap-2.5 text-sm font-semibold text-white/90">
+              <li>Licensed and insured movers</li>
+              <li>One fixed price, locked in writing</li>
+              <li>Serving Kingston and across Ontario</li>
+            </ul>
+            <a
+              href="tel:+16137701638"
+              className="mt-7 inline-flex items-center justify-center rounded-full bg-ink px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-white transition-transform hover:-translate-y-0.5"
+            >
+              Or call (613) 770-1638
+            </a>
+          </Reveal>
 
-      <section id="why" className="px-6 py-16 md:py-24">
-        <Reveal className="mx-auto w-full max-w-5xl">
-          <WhyBitlane />
-        </Reveal>
-      </section>
-
-      <section id="services" className="px-6 py-16 md:py-24">
-        <Reveal className="mx-auto w-full max-w-5xl">
-          <WhatWeMove />
-        </Reveal>
-      </section>
-
-      <section id="area" className="px-6 py-16 md:py-24">
-        <Reveal className={`mx-auto w-full max-w-2xl ${CARD}`}>
-          <ServiceArea />
-        </Reveal>
-      </section>
-
-      <section aria-label="Coverage" className="px-6 py-16 md:py-24">
-        <Reveal className="mx-auto w-full max-w-4xl">
-          <CoverageStats />
-        </Reveal>
+          <Reveal className="rounded-3xl bg-paper p-6 shadow-2xl md:p-8">
+            <QuoteForm />
+          </Reveal>
+        </div>
       </section>
     </main>
   );

@@ -3,38 +3,39 @@
 @tailwind utilities;
 
 :root {
-  --velocity-red: #E63946;
-  --crimson-shadow: #8B1E2D;
-  --amber-pulse: #F4A261;
-  --amber-deep: #C77B3F;
-  --ink: #0E0E10;
-  --paper: #F5F1E8;
-  --navy: #1A2B4A;
-  --gold: #C9A961;
-  color-scheme: dark;
+  --green: #1FBF4B;
+  --green-deep: #128A37;
+  --green-dark: #0E6E2C;
+  --green-lime: #3BD865;
+  --grape: #8B5CF6;
+  --ink: #0C0A0A;
+  --paper: #FFFFFF;
+  --mist: #F2F4EF;
+  --cloud: #E5E8E1;
 }
 
 html {
-  scroll-padding-top: 92px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
 }
 
 body {
-  background:
-    radial-gradient(1100px 700px at 85% -10%, rgba(26, 43, 74, 0.55), transparent 60%),
-    radial-gradient(900px 600px at -10% 105%, rgba(139, 30, 45, 0.22), transparent 55%),
-    var(--ink);
-  font-optical-sizing: auto;
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
 }
 
 ::selection {
-  background: var(--velocity-red);
-  color: var(--paper);
+  background: var(--green);
+  color: #fff;
 }
 
 :focus-visible {
-  outline: 2px solid var(--velocity-red);
-  outline-offset: 3px;
-  border-radius: 2px;
+  outline: 3px solid var(--green-deep);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 /* Lenis smooth scroll */
@@ -49,52 +50,87 @@ html.lenis body {
   overflow: hidden;
 }
 
+/* Heavy display headings, Pure-Movers style. */
+.display {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+  text-transform: uppercase;
+}
+
 /* ------------------------------------------------------------------ */
-/* Scroll reveals: SSR markup is fully visible; the hiding class is    */
-/* only applied by JavaScript, so content always reads without JS.     */
+/* Scroll reveal: hidden state added only by JS, so no-JS reads fully. */
 /* ------------------------------------------------------------------ */
 
 .reveal-ready {
   opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.5s ease-out, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(16px);
+  transition: opacity 0.55s ease-out, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
-
 .reveal-ready.is-in {
   opacity: 1;
   transform: none;
 }
 
-/* Hero load-in: CSS keyframes so it ends visible even without JS. */
 @media (prefers-reduced-motion: no-preference) {
   .hero-fade {
-    animation: page-fade 0.6s ease-out 1;
+    animation: fade-in 0.6s ease-out 1;
   }
 }
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
-@keyframes page-fade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+/* ------------------------------------------------------------------ */
+/* Marquee banner: repeating brand text on a green strip.             */
+/* ------------------------------------------------------------------ */
+
+.marquee {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: 0;
+  background: var(--green);
+}
+.marquee__track {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.7rem 0.75rem;
+  white-space: nowrap;
+  animation: marquee-x 26s linear infinite;
+}
+.marquee--reverse .marquee__track {
+  animation-direction: reverse;
+}
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none;
   }
 }
 
 /* ------------------------------------------------------------------ */
-/* Truck animation section. Three layout modes:                        */
-/*  - default (no JS, desktop reduced motion): milestone cards in a    */
-/*    2x2 grid, no canvas.                                             */
-/*  - mobile (< 768px): static vertical timeline with a thin left      */
-/*    connecting line and numbered cards.                              */
-/*  - data-truck="on" (>= 768px, motion allowed, JS): tall scroll      */
-/*    section, sticky 3D canvas, cards positioned along the road.      */
+/* Truck animation section (recolored green). Same three modes:        */
+/*  default / reduced motion: 2x2 card grid, no canvas                 */
+/*  mobile: static vertical timeline                                   */
+/*  data-truck="on": tall scroll section + sticky canvas               */
 /* ------------------------------------------------------------------ */
 
 .truck-section {
   position: relative;
-  background-image: radial-gradient(rgba(245, 241, 232, 0.05) 1px, transparent 1.5px);
-  background-size: 28px 28px;
+  background:
+    radial-gradient(900px 500px at 80% 0%, rgba(31, 191, 75, 0.16), transparent 60%),
+    #0B130D;
+  background-image:
+    radial-gradient(900px 500px at 80% 0%, rgba(31, 191, 75, 0.16), transparent 60%),
+    radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1.5px);
+  background-size: auto, 28px 28px;
 }
 
 .truck-stage {
@@ -118,13 +154,12 @@ html.lenis body {
 
 .milestone {
   position: relative;
-  border: 1px solid rgba(245, 241, 232, 0.1);
-  background: rgba(21, 21, 27, 0.92);
-  border-radius: 1rem;
-  padding: 1.25rem 1.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 1.25rem;
+  padding: 1.4rem 1.5rem;
 }
 
-/* Mobile: static process timeline with connecting line. */
 @media (max-width: 767px) {
   .milestones {
     position: relative;
@@ -137,26 +172,24 @@ html.lenis body {
     top: 14px;
     bottom: 14px;
     width: 2px;
-    background: rgba(245, 241, 232, 0.12);
+    background: rgba(255, 255, 255, 0.16);
   }
   .milestone::before {
     content: '';
     position: absolute;
     left: -27px;
-    top: 26px;
-    width: 8px;
-    height: 8px;
+    top: 28px;
+    width: 9px;
+    height: 9px;
     border-radius: 9999px;
-    background: var(--amber-pulse);
-    box-shadow: 0 0 0 2px var(--amber-deep);
+    background: var(--green);
+    box-shadow: 0 0 0 3px rgba(31, 191, 75, 0.3);
   }
 }
 
-/* Scroll-driven 3D mode. */
 .truck-section[data-truck='on'] {
   height: 430svh;
 }
-
 .truck-section[data-truck='on'] > h2 {
   position: absolute;
   top: 0;
@@ -164,7 +197,6 @@ html.lenis body {
   right: 0;
   z-index: 5;
 }
-
 .truck-section[data-truck='on'] .truck-stage {
   display: block;
   position: sticky;
@@ -172,7 +204,6 @@ html.lenis body {
   height: 100svh;
   z-index: 0;
 }
-
 .truck-section[data-truck='on'] .milestones {
   display: block;
   position: absolute;
@@ -183,7 +214,6 @@ html.lenis body {
   z-index: 10;
   pointer-events: none;
 }
-
 .truck-section[data-truck='on'] .milestone {
   position: absolute;
   top: var(--mt, 50%);
@@ -192,41 +222,31 @@ html.lenis body {
   opacity: 0;
   transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
-
 .truck-section[data-truck='on'] .milestone[data-side='left'] {
   left: max(5vw, calc(50vw - 480px));
   transform: translateX(-30px);
 }
-
 .truck-section[data-truck='on'] .milestone[data-side='right'] {
   right: max(5vw, calc(50vw - 480px));
   transform: translateX(30px);
 }
-
 .truck-section[data-truck='on'] .milestone.is-passed {
   opacity: 1;
   transform: translateX(0);
 }
 
 /* ------------------------------------------------------------- */
-/* Reduced motion: static everywhere, content fades in once only. */
+/* Reduced motion: static everywhere, content visible.            */
 /* ------------------------------------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
-  main {
-    animation: page-fade 0.4s ease-out 1;
-  }
-
   .reveal-ready,
   .truck-section[data-truck='on'] .milestone {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
   }
-
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     scroll-behavior: auto !important;
   }
 }

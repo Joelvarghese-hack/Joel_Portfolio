@@ -9,17 +9,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "velocity-red": "#E63946",
-        "crimson-shadow": "#8B1E2D",
-        "amber-pulse": "#F4A261",
-        "amber-deep": "#C77B3F",
-        ink: "#0E0E10",
-        paper: "#F5F1E8",
-        navy: "#1A2B4A",
-        gold: "#C9A961",
+        // Bright green / white / ink system
+        green: {
+          DEFAULT: "#1FBF4B",
+          deep: "#128A37",
+          dark: "#0E6E2C",
+          lime: "#3BD865",
+          soft: "#E6F8EC",
+        },
+        grape: "#8B5CF6",
+        ink: "#0C0A0A",
+        slatey: "#3A3A3E",
+        paper: "#FFFFFF",
+        mist: "#F2F4EF",
+        cloud: "#E5E8E1",
       },
       fontFamily: {
-        sans: ["var(--font-bricolage)", "system-ui", "sans-serif"],
+        sans: ["var(--font-hanken)", "system-ui", "sans-serif"],
       },
     },
   },

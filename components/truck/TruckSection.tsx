@@ -113,8 +113,8 @@ export default function TruckSection() {
 
   return (
     <section ref={sectionRef} className="truck-section" aria-label="Our Process">
-      <h2 className="px-6 pb-10 pt-16 text-center text-3xl font-extrabold tracking-tight text-paper md:pt-20 md:text-4xl">
-        Our Process
+      <h2 className="display px-6 pb-10 pt-16 text-center text-[clamp(1.9rem,4.5vw,3.2rem)] text-white md:pt-20">
+        You will notice our truck from miles away
       </h2>
 
       <div className="truck-stage" aria-hidden="true">
@@ -130,11 +130,11 @@ export default function TruckSection() {
             data-side={milestone.side}
             style={{ "--mt": cardTop(milestone.t) } as CSSProperties}
           >
-            <span className="text-3xl font-extrabold leading-none text-amber-pulse" aria-hidden="true">
+            <span className="display text-3xl leading-none text-green-lime" aria-hidden="true">
               {milestone.num}
             </span>
-            <h3 className="mt-2 text-lg font-bold text-paper">{milestone.title}</h3>
-            <p className="mt-1.5 text-sm leading-relaxed text-paper/65">{milestone.body}</p>
+            <h3 className="mt-2 text-lg font-extrabold text-white">{milestone.title}</h3>
+            <p className="mt-1.5 text-sm leading-relaxed text-white/65">{milestone.body}</p>
           </li>
         ))}
       </ol>
